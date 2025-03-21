@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:fragment="head(title)" th:insert="~{fragments :: head('Expert en plomberie et chauffage')}"></head>
+<body>
+<header class="fixed-top bg-body-tertiary computer-navbar-container title-font hide-on-scroll">
+    <div id="header-central">
+        <div class="header-links text-end">
+            <a th:if="${isAdmin}" th:href="@{/admin}">
+                <img th:src="@{/img/icons/gear.svg}" alt="Une image d'une roue dentée" title="Accès au panel administration" width="30">
+            </a>
+            <a class="navbar-element" th:href="@{/}">Accueil</a>
+            <span class="navbar-element" onclick="scrollToId('services')">Nos services</span>
+        </div>
+        <div id="header-logo">
+            <img th:src="@{/img/logo.png}" alt="Logo de Renova" width="100">
+        </div>
+        <div class="header-links text-start">
+            <span class="navbar-element" onclick="scrollToId('reasons')">Pourquoi nous ?</span>
+            <span class="navbar-element" th:unless="${promos.isEmpty()}" onclick="scrollToId('promos')">
+                Promotions
+                <sup class="promos-warning">!</sup>
+            </span>
+        </div>
+    </div>
+</header>
+
+<header class="phone-navbar-container mt-2">
+    <nav id="offcanvas-phone" class="navbar bg-body-tertiary fixed-top hide-on-scroll">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button id="open-navbar" class="navbar-toggler hide-on-scroll" type="button"  aria-controls="phone-navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="phone-navbar" aria-labelledby="phone-navbar">
+                <div class="offcanvas-header">
+                    <img class="navbar-brand" th:src="@{/img/logo.png}" alt="Logo de Renova" width="75">
+                    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <button class="phone-navigation-link navbar-element" onclick="scrollToFromOffCanvas($('#services'))">Nos services</button>
+                    <button class="phone-navigation-link navbar-element" onclick="scrollToFromOffCanvas($('#'))"></button>
+                    <button class="phone-navigation-link navbar-element" onclick="scrollToFromOffCanvas($('#promos'))" th:unless="${promos.isEmpty()}">
+                        Promos
+                        <sub class="promos-warning">!</sub>
+                    </button>
+                    <button class="phone-navigation-link navbar-element" onclick="scrollToFromOffCanvas($('footer'))">Nos réseaux</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section id="banner">
+    <div id="banner-container">
+        <h1>
+            Renova<br>
+            Votre expert en plomberie !
+        </h1>
+        <div id="banner-description">
+            Nous offrons une <b>gamme complète</b> de servies de plomberie,
+            conçu pour répondre à <b>tous besoins</b> résidentiels, commerçiaux et industriels.
+            <b>Et ce 7j/7 et 24h/24</b>.
+        </div>
+        <div id="banner-navigation">
+            <a
+                    id="banner-contact-us"
+                    class="banner-navigation-button"
+                    th:href="@{https://wa.me/{phoneNumber}(phoneNumber=${contact.phoneNumber})}"
+                    target="_blank"
+            >Contactez-nous</a>
+            <button
+                    id="banner-our-works"
+                    class="banner-navigation-button"
+                    onclick="scrollToId('our-works')"
+            >Découvrez-nos prestations</button>
+        </div>
+        <div id="banner-advantage">
+            <span th:each="reason : ${banner.reasons}">
+                <img th:src="@{/img/icons/check-mark.svg}" alt="Un check vert">
+                <span th:remove="tag" th:text="${reason}"></span>
+            </span>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="section section-dark pb-2">
+    <h2>Nos services</h2>
+    <div class="section-element">
+        <div class="row">
+            <div th:each="service : ${services}" th:object="${service}" class="col-md-3 service-container">
+                <div class="service-icon" th:style="|background-color: *{color}; box-shadow: box-shadow: inset 10px 0 0 0 *{color};|">
+                    <img th:src="@{/img/icons/services/{icon}.svg(icon=*{icon})}" th:alt="|Icone du service *{name}|">
+                </div>
+                <h3 th:text="*{name}"></h3>
+                <div class="service-tasks">
+                    <div th:each="task : *{tasks}">
+                        <strong th:text="|${task.name} :|"></strong>
+                        <small>
+                            <i th:text="${task.description}"></i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Qu'est-ce qui distingue nos techniciens ?</h2>
+    <div class="section-element">
+        <div class="section-text-image section-description">
+            Notre priorité est que vous pensiez à nous à chaque fois que vous avez besoin de réparations, installations, remplacements, conceptions ou constructions.
+            <br><br>
+            Nous disposons d'équipes spécialisées : chauffagistes, plombiers, experts en sanitaire, électriciens, ainsi que pour le débouchage.
+            <br><br>
+            Tous nos artisans sont hautement qualifiés, assurés et expérimentés.
+            <br>
+            Nous résolvons vos problèmes rapidement et à un tarif transparent, sans frais cachés ni frais d'appel.
+        </div>
+        <div class="section-text-image">
+            <img th:src="@{/img/examples/clé.jpg}" alt="Une clé à molette sur un chauffage" style="height: 75%">
+        </div>
+    </div>
+</section>
+
+<section id="reasons" class="section section-dark">
+    <h2>Vos besoins en chauffage et plomberie</h2>
+    <div class="section-element">
+        <div class="section-text-image text-end">
+            <img th:src="@{/img/examples/chauffage.jpg}" alt="Un chauffagiste qui répare un chauffage">
+        </div>
+        <div class="section-text-image">
+            <div th:each="reason, iter : ${reasons}" th:object="${reason}" class="mt-1 mb-2">
+                <h3 th:text="|${iter.index + 1}. *{name}|"></h3>
+                <span class="section-description" th:text="*{description}"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="our-works" class="section">
+    <h2>Nos réalisations</h2>
+    <div class="section-element" th:insert="~{pictures-slide-show :: slide-show(${pictures})}"></div>
+</section>
+
+<section id="promos" class="section" th:unless="${promos.isEmpty()}">
+    <h2>Promotions</h2>
+    <div class="section-element" style="text-align: center">
+        <div th:each="promo, el : ${promos}" th:object="${promo}" class="promo-element" th:classappend="${el.even ? 'promo-element-dark' : ''}">
+            <h3 th:text="*{name}"></h3>
+            <div th:if="*{endDate}" th:remove="tag">
+                <b>Temp restant :</b>
+                <span th:attr="data-time-left=*{toMillisecond()}"></span>
+            </div>
+            <div th:if="*{description}">
+                <button class="promo-description-more-info" onclick="showPromoDescription($(this).parent())">En savoir plus</button>
+                <div class="promo-description" th:text="*{description}" style="display: none"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="ask-quote" class="text-end p-3 hide-on-scroll">
+    <a
+            th:href="@{https://wa.me/{phoneNumber}(phoneNumber=${contact.phoneNumber}, text=${contact.quoteMessage})}"
+            target="_blank"
+    >
+        <img th:src="@{/img/quote.png}" alt="Une bulle verte où il est écrit 'Demander un devis'">
+    </a>
+</div>
+
+<footer class="text-center">
+    <div class="social-network-link-container">
+        <a class="social-network-link" th:href="@{https://wa.me/{phoneNumber}(phoneNumber=${contact.phoneNumber})}" target="_blank">
+            <img th:src="@{/img/icons/contact/whatsapp.svg}" width="30" height="30" alt="Symbole de Whatsapp">
+            <span th:text="${contact.phoneNumber}"></span>
+        </a>
+        <a class="social-network-link" th:href="@{https://www.google.com/maps/place(q=${contact.location})}" target="_blank">
+            <img th:src="@{/img/icons/contact/location.svg}" width="35" height="35" alt="Icon de location">
+            <span th:text="${contact.location}"></span>
+        </a>
+        <a class="social-network-link" th:href="@{https://www.instagram.com/{instagram}(instagram=${contact.instagram})}" target="_blank">
+            <img th:src="@{/img/icons/contact/instagram.svg}" width="35" height="35" alt="Icon d'Instagram">
+            <span th:text="${contact.instagram}"></span>
+        </a>
+        <span class="social-network-link">
+            <span style="font-family: Fantasy, serif; font-size: 1.2em">TVA</span>
+            <span th:text="${contact.tva}"></span>
+        </span>
+    </div>
+</footer>
+
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

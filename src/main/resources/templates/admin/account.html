@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{admin/admin-layout :: head('Gérer mon compte')}"></head>
+<body th:replace="~{admin/admin-layout :: body(~{::content})}">
+<div th:fragment="content" th:object="${currentUser}">
+    <div class="card" style="width: 60%">
+        <div class="card-body">
+            <div class="alert alert-danger" style="display: none"></div>
+            <div class="my-3">
+                <div class="form-group">
+                    <label for="user-username">Nom d'utilisateur</label>
+                    <input type="text" id="user-username" class="form-control" th:value="*{username}">
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="user-password">Mot de passe</label>
+                        <input type="password" id="user-password" class="form-control" placeholder="Laissez le champ vide pour ne pas le changer">
+                    </div>
+                </div>
+                <div class="col-md-3" style="align-content: center">
+                    <div class="form-check">
+                        <label for="user-toggle-password" class="form-check-label">Afficher/cacher</label>
+                        <input type="checkbox" id="user-toggle-password" class="form-check-input" onclick="togglePassword(this, $('#user-password'))">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-primary" onclick="update()">Sauvegarder</button>
+        </div>
+    </div>
+    <script th:src="@{/js/admin/account.js}"></script>
+</div>
+</body>
+</html>

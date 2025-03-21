@@ -1,0 +1,43 @@
+@media (min-width: 768px) {
+    header.phone-navbar-container, #full-screen-picture-phone {
+        display: none;
+    }
+
+    #banner-container {
+        top: 30%;
+    }
+
+    #banner-description {
+        font-size: 1.5em;
+        margin: 0 25%;
+    }
+
+    #banner-navigation {
+        margin-top: 1em;
+    }
+
+    .banner-navigation-button {
+        font-size: 1.5em;
+    }
+
+    .social-network-link {
+        margin: 1em;
+    }
+
+    .section-element:has(.section-text-image) {
+        display: flex;
+    }
+
+    .section-text-image {
+        flex: 1;
+        padding: 0 1em;
+    }
+
+    .picture {
+        width: 15%;
+    }
+
+    .slide-show-arrow {
+        max-width: 7em;
+    }
+}

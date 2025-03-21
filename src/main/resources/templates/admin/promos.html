@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{admin/admin-layout :: head('Gérer les promotions')}"></head>
+<body th:replace="~{admin/admin-layout :: body(~{::content})}">
+<div th:fragment="content">
+    <div class="text-end m-3">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-promos-modal">+ Ajouter</button>
+    </div>
+    <div id="global-alert" class="alert alert-danger" style="display: none"></div>
+    <div class="row m-3">
+        <div th:each="promo : ${promos}" th:object="${promo}" class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md">
+                            <h3 class="card-title" th:text="${promo}"></h3>
+                        </div>
+                        <div class="col-md text-end">
+                            <button class="btn btn-danger" th:onclick="|removePromo(*{id}, this)|">Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <b>Description :</b><br>
+                    <div th:if="*{description}" th:text="*{description}" class="promo-description"></div>
+                    <i th:unless="*{description}" class="promo-description">Pas de description</i>
+                </div>
+                <div class="card-footer">
+                    <b>Date de fin :</b>
+                    <span th:if="*{endDate}" th:remove="tag" th:text="|*{endDate.getDayOfMonth()}/*{endDate.getMonthValue()}/*{endDate.getYear()}|"></span>
+                    <i th:unless="*{endDate}">Pas de fin</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-promos-modal" class="modal modal-lg fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Ajouter une promotion</h2>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="alert-current-promo" class="mx-2 alert alert-danger" style="display: none"></div>
+                    <div class="form-group">
+                        <label for="current-promo-name">Nom de la promotion</label>
+                        <input type="text" id="current-promo-name" class="form-control" placeholder="Nom de la promo">
+                    </div>
+                    <div class="form-group">
+                        <label for="current-promo-description">Description de la promotion</label>
+                        <textarea id="current-promo-description" class="form-control" placeholder="Décrivez la promotion, n'hésitez par à retourner à la ligne"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="current-promo-end-date">Date de fin de la promotion</label>
+                        <input type="date" class="form-control" id="current-promo-end-date">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="button-current-promo" class="btn btn-primary" onclick="createPromo()">+ Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin/promos.js}"></script>
+</div>
+</body>
+</html>
+
+<style>
+    .promo-description {
+        white-space: pre-line;
+        height: 7em;
+        overflow-y: scroll;
+        display: block;
+    }
+</style>

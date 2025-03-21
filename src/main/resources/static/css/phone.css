@@ -1,0 +1,57 @@
+@media(max-width: 767px) {
+    header.computer-navbar-container, #full-screen-picture-desktop {
+        display: none;
+    }
+
+    #banner-container {
+        top: 10%;
+    }
+
+    #banner-description {
+        font-size: 1em;
+        margin: 0 10%;
+    }
+
+    #banner-navigation {
+        margin-top: 0.5em;
+    }
+
+    .banner-navigation-button {
+        font-size: 1.1em;
+    }
+
+    #banner-advantage span {
+        font-size: 0.8em;
+        display: block;
+    }
+
+    .description h1 {
+        font-size: 2em;
+        font-weight: bolder;
+    }
+
+    .description h2 {
+        font-size: 1em;
+    }
+
+    .social-network-link {
+        margin: 0.5em;
+    }
+
+    .section-element, .section-text-image {
+        display: block;
+    }
+
+    .section-element {
+        margin: 0.1em !important;
+        padding: 0 0.5em;
+    }
+
+    .picture {
+        width: 75%;
+    }
+
+    .slide-show-arrow {
+        max-width: 4em;
+    }
+}
