@@ -1,0 +1,24 @@
+services:
+  postgres:
+    container_name: pg_db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /data
+    volumes:
+      - ./db-data:/data
+
+  spring_boot:
+    container_name: spring_boot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - './app:/app'
+      - './${APP_CAR_PICTURE_FOLDER}:/app/${APP_CAR_PICTURE_FOLDER}'
+      - './keystore:/keystore'
+    ports:
+      - '443:443'
+      - '80:80'

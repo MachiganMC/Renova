@@ -1,0 +1,93 @@
+[
+  {
+    "id": "installation",
+    "name": "Installation et Rénovation",
+    "icon": "installation",
+    "color": "#EA8C55",
+    "tasks": [
+      {
+        "name": "Réseau et plomberie complets",
+        "description": "Pose de systèmes de tuyauterie pour les nouvelles constructions ou projets de rénovations."
+      },
+      {
+        "name": "Sanitaires modernes",
+        "description": "Installation de toilettes, éviers, lavabos, douches (y compris italienne) et baignoires."
+      },
+      {
+        "name": "Système de chauffage",
+        "description": "Installation et raccordement de chaudières, radiateurs et plaques chauffantes."
+      },
+      {
+        "name": "Optimisation des installations",
+        "description": "Modernisation pour améliorer l'efficacité et la durabilité."
+      }
+    ]
+  },
+
+  {
+    "id": "reparation",
+    "name": "Réparation et Entretien",
+    "icon": "reparation",
+    "color": "#80CBC4",
+    "tasks": [
+      {
+        "name": "Fuite d'eau",
+        "description": "Détéction et réparation rapide des fuites visibles ou invisibles."
+      },
+      {
+        "name": "Débouchage",
+        "description": "Intervention sur les éviers, toilettes, douches et canalisations obstruées."
+      },
+      {
+        "name": "Chauffe-eau",
+        "description": "Réparation, remplacement et détartrage des chauffes-eau électriques, à solaires."
+      },
+      {
+        "name": "Entretien préventif",
+        "description": "Nettoyage et maintenance des systèmes pour éviter les pannes."
+      }
+    ]
+  },
+
+  {
+    "id": "urgence",
+    "name": "Service d'Urgence 24/7",
+    "icon": "emergency",
+    "color": "#FFB433",
+    "tasks": [
+      {
+        "name": "Intervention rapide",
+        "description": "En cas de fuites majeures, dégâts des eaux ou pannes critiques."
+      },
+      {
+        "name": "Réparations hivernales",
+        "description": "Déblocage et réparation de tuyaux gelés."
+      },
+      {
+        "name": "Débouchage urgent",
+        "description": "Toilettes, éviers ou drains bouchés."
+      }
+    ]
+  },
+
+  {
+    "id": "diagnostic",
+    "name": "Inspection et Diagnostic",
+    "icon": "inspect",
+    "color": "#41644A",
+    "tasks": [
+      {
+        "name": "Inspection vidéo",
+        "description": "Localisation précise des blocages ou problèmes grâce à une caméra spécialisée."
+      },
+      {
+        "name": "Détection avancées des fuites",
+        "description": "Outils modernes pour identifier les fuites sans endommagés les murs ou sols."
+      },
+      {
+        "name": "Audit de conformité",
+        "description": "Vérification de vos installations selon les normes en vigueur."
+      }
+    ]
+  }
+]

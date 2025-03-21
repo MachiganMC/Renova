@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{admin/admin-layout :: head('Gérer les photos')}"></head>
+<body th:replace="~{admin/admin-layout :: body(~{::content})}">
+<div th:fragment="content">
+    <div class="text-end mx-3">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-picture-modal">+ Ajouter</button>
+    </div>
+
+    <div th:unless="${pictures.isEmpty()}" th:replace="~{pictures-slide-show :: slide-show(pictures=${pictures}, showDeleteButton=true)}"></div>
+    <div th:if="${pictures.isEmpty()}" class="display-6 text-center">
+        Il n'y actuellement aucune photo.
+        Pour en ajouter une, <a href="#" data-bs-toggle="modal" data-bs-target="#add-picture-modal">cliquez ici</a>.
+    </div>
+
+    <div id="add-picture-modal" class="modal modal-lg fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Ajouter une photo</h2>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="alert-current-picture" class="mx-2 alert alert-danger" style="display: none"></div>
+                    <div class="text-center">
+                        <img id="current-picture" alt="Affichage de démo de la photo">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-current-picture"></label>
+                        <input id="edit-current-picture" type="file" accept="image/*" class="form-control" onchange="previewPicture(this)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="button-current-picture" class="btn btn-primary" onclick="savePicture()">+ Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="max-file-size" th:data-value="${maxFileSize.toBytes()}" th:data-string="|${maxFileSize.toMegabytes()}MB|"></div>
+    <script th:src="@{/js/admin/pictures.js}"></script>
+</div>
+</body>
+</html>
